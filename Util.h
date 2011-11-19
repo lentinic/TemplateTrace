@@ -20,8 +20,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 #pragma once
-
 #include "BasicTypes.h"
+#include "Op.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 template<int64_t ipart, int64_t numer, int64_t denom>
@@ -45,5 +45,17 @@ struct Pair
 {
 	typedef A One;
 	typedef B Two;
+};
+///////////////////////////////////////////////////////////////////////////////
+template<bool ishit, class Origin, class Dir, class Dist>
+struct CalcPosition
+{
+	typedef typename Add<Origin, typename Mul<Dir, Dist>::Result>::Result Result;
+};
+
+template<class Origin, class Dir, class Dist>
+struct CalcPosition<false,Origin,Dir,Dist>
+{
+	typedef Vec3Zero Result;
 };
 ///////////////////////////////////////////////////////////////////////////////

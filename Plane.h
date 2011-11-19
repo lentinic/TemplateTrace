@@ -22,6 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 #include "BasicTypes.h"
 #include "Op.h"
+#include "Util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 template<class N, class D> 
@@ -66,8 +67,9 @@ struct Intersect<Ray<ORIGIN,DIR>, Plane<NORM,DIST> > :
 {
 private:
 	typedef typename IntersectPlane<ORIGIN,DIR,NORM,DIST>::intersection Base;
+
 public:
-	typedef typename Add<ORIGIN, typename Mul<DIR, Base>::Result>::Result Position;
+	typedef typename CalcPosition<Base::Type == Hit, ORIGIN, DIR, Base>::Result Position;
 	typedef NORM Normal;
 	typedef DIR View;
 };

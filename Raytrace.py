@@ -89,11 +89,11 @@ for y in range(0,height,1):
         inst0.wait()
         inst1.wait()
         
-        inst0 = Popen(["tmp0.exe"], stdout=PIPE)
+        inst0 = Popen(["./tmp0.exe"], stdout=PIPE)
         out0 = inst0.communicate()[0]
         output.write(out0)
         
-        inst1 = Popen(["tmp1.exe"], stdout=PIPE)
+        inst1 = Popen(["./tmp1.exe"], stdout=PIPE)
         out1 = inst1.communicate()[0]
         output.write(out1)
         

@@ -28,11 +28,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "Buffer.h"
 
 #ifndef OUTW
-#define OUTW 32
-#define OUTH 32
+#define OUTW 4
+#define OUTH 4
 #define UX 0
 #define UY 0
-#define TILEW 8
+#define TILEW 2
 #define WRITE_BMP
 #endif
 
@@ -60,7 +60,12 @@ struct PixelWriter
 
 int main()
 {
+#if defined(WRITE_BMP)
+	BGR buf[OUTW*OUTH];
+#else
 	BGR buf[TILEW];
+#endif
+
 	memset(buf, 0, sizeof(buf));
 
 	PixelWriter pix;

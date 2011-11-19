@@ -22,6 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #pragma once
 #include "BasicTypes.h"
 #include "Op.h"
+#include "Util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 template<class P, class R> struct Sphere
@@ -86,7 +87,7 @@ struct Intersect<Ray<ORIGIN,DIR>, Sphere<CENTER,RAD> > :
 private:
 	typedef typename IntersectSphere<ORIGIN,DIR,CENTER,RAD>::intersection Base;
 public:
-	typedef typename Add<ORIGIN, typename Mul<DIR, Base>::Result>::Result Position;
+	typedef typename CalcPosition<Base::Type == Hit, ORIGIN, DIR, Base>::Result Position;
 	typedef typename SphereNormal<Base::Type == Hit, Position, CENTER>::Result Normal;
 	typedef DIR View;
 };
